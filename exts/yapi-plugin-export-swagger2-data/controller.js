@@ -112,7 +112,7 @@ class exportSwaggerController extends baseController {
                 //host: "",             // No find any info of host in this point :-)
                 basePath: curProject.basepath ? curProject.basepath : '/', //default base path is '/'(root)
                 tags: (() => {
-                    let tagArray = [];
+                    let tagArray = !curProject.tag?[]: curProject.tag.map(tag=>({name:tag.name,description:tag.desc}));
                     list.forEach(t => {
                         tagArray.push({
                             name: t.name,
@@ -139,6 +139,7 @@ class exportSwaggerController extends baseController {
                             apisObj[api.path][api.method.toLowerCase()] = (() => {
                                 let apiItem = {};
                                 apiItem['tags'] = [aptTag.name];
+                                api._doc.tag && api._doc.tag.forEach(t=>apiItem['tags'].push(t));
                                 apiItem['summary'] = api.title;
                                 apiItem['description'] = api.markdown;
                                 switch (api.req_body_type) {

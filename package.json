@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "dev-copy-icon": "cp -r static/iconfont ./",
-    "dev-server": " nodemon server/app.js dev -L",
+    "dev-server": " nodemon --inspect server/app.js dev -L",
     "install-server": " node server/install.js",
     "dev-client": "npm run dev-copy-icon && ykit s -p 4000",
     "dev": "npm run dev-server & npm run dev-client",
